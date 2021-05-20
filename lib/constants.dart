@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'size_config.dart';
 
+const kTitleStyle = TextStyle(
+  fontSize: 20.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
 const kBodyColor = Color(0xFF1592E6);
 const kPrimaryColor = Color(0xFF007BFF);
 const kPrimaryLightColor = Color(0xFFFFECDF);

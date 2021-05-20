@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  get: 
+  get_storage:
   flutter:
     sdk: flutter
 
@@ -33,6 +35,11 @@ dependencies:
   json_table: ^2.0.1
   page_transition: ^1.1.7+6
   animations: ^2.0.0
+  provider: ^5.0.0
+  searchable_dropdown: ^1.1.3
+  flutter_icons: ^1.1.0
+  rxdart: ^0.27.0
+  flutter_bloc: ^7.0.0
 
 dev_dependencies:
   flutter_test:

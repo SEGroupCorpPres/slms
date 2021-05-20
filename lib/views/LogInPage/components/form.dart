@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slms/views/HomePage/home.dart';
 
 import 'full_name_text_field_widget.dart';
 import 'password_text_field_widget.dart';
@@ -10,7 +11,7 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool checkBoxValue = false;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _SignInFormState extends State<SignInForm> {
     double _width = MediaQuery.of(context).size.width;
     return Container(
       child: Form(
-        key: formkey,
+        key: _formKey,
         child: Column(
           children: <Widget>[
             FullNameTextFieldWidget(
@@ -38,44 +39,47 @@ class _SignInFormState extends State<SignInForm> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Checkbox(
-                    value: checkBoxValue,
-                    onChanged: (bool value) {
-                      setState(() {
-                        checkBoxValue = value;
-                      });
-                    },
+                  value: checkBoxValue,
+                  onChanged: (bool value) {
+                    setState(() {
+                      checkBoxValue = value;
+                    });
+                  },
                 ),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'forgot password ?',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
+                  onPressed: () {},
+                  child: Text(
+                    'forgot password ?',
+                    style: TextStyle(
+                      color: Colors.blue,
                     ),
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: (10 / 812.0) *  _height),
+            SizedBox(height: (10 / 812.0) * _height),
             RaisedButton(
               color: Colors.blue,
-              onPressed: (){},
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: (300.0 / 812.0) *  _height,
-                  height: (50.0 / 812.0) *  _width,
-                  child: Center(
-                    child: Text(
-                      'Sign In'.toUpperCase(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                width: (300.0 / 812.0) * _height,
+                height: (50.0 / 812.0) * _width,
+                child: Center(
+                  child: Text(
+                    'Sign In'.toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
                     ),
                   ),
                 ),
+              ),
             ),
           ],
         ),
@@ -83,6 +87,3 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 }
-
-
-
