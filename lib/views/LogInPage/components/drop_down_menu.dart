@@ -82,8 +82,8 @@ class _DropdownSearchableState extends State<DropdownSearchable> {
                         SearchableDropdown.single(
                           items: items,
                           value: selectedValue,
-                          hint: "Select one",
-                          searchHint: "Select one",
+                          hint: "Maktabni tanlash",
+                          searchHint: "Maktabni tanlash",
                           onChanged: (value) {
                             setState(() {
                               selectedValue = value;

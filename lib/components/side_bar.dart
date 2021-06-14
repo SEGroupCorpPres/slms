@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:slms/bloc.navigation_bloc/navigation_bloc.dart';
 
-import 'menu_item.dart';
 
+import 'menu_item.dart';
+import 'package:slms/views/LogInPage/components/body.dart';
 class SideBar extends StatefulWidget {
   @override
   _SideBarState createState() => _SideBarState();
@@ -19,6 +20,20 @@ class _SideBarState extends State<SideBar>
   Stream<bool> isSideBarOpenedStream;
   StreamSink<bool> isSideBarOpenedSink;
   final _animationDuration = const Duration(milliseconds: 500);
+  static final isParent = Body();
+  static final isBibliotiker = Body();
+  // ignore: non_constant_identifier_names
+  BodySideBarBuilder(){
+    if(isParent.isParent == true) {
+      return buildParentSideBarMenuItems();
+    }
+    if(isBibliotiker.isBibliotiker == true){
+      return buildBibliotikerSideBarMenuItems();
+    }
+    if(isParent.isParent == true && isBibliotiker.isBibliotiker == true){
+      return buildParentAndBibliotikerSideBarMenuItems();
+    }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -62,90 +77,14 @@ class _SideBarState extends State<SideBar>
           top: 0,
           bottom: 0,
           left: isSideBarOpenedAsync.data ? 0 : -_width,
-          right: isSideBarOpenedAsync.data ? 0 : _width - 45,
+          right: isSideBarOpenedAsync.data ? 0 : _width - 35,
           child: Row(
             children: <Widget>[
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
                   color: const Color(0xFF262AAA),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 100),
-                      ListTile(
-                        title: Text(
-                          'Starscream',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 30,
-                          ),
-                        ),
-                        subtitle: Text(
-                          'artessdu@gmail.com',
-                          style:
-                              TextStyle(color: Color(0xFF1BB5FD), fontSize: 20),
-                        ),
-                        leading: CircleAvatar(
-                          child: Icon(
-                            Icons.perm_identity,
-                            color: Colors.white,
-                          ),
-                          radius: 40,
-                        ),
-                      ),
-                      Divider(
-                        height: 65,
-                        thickness: 0.5,
-                        color: Colors.white.withOpacity(0.3),
-                        indent: 32,
-                        endIndent: 32,
-                      ),
-                      MenuItem(
-                        icon: Icons.home_outlined,
-                        title: 'Home',
-                        onTap: () {
-                          onIconPressed();
-                          BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HomePageClickedEvent);
-                        },
-                      ),
-                      MenuItem(
-                        icon: Icons.group_outlined,
-                        title: 'Children',
-                        onTap: () {
-                          onIconPressed();
-                           BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ChildrenPageClickedEvent);
-                        },
-                      ),
-                      MenuItem(
-                        icon: Icons.payment_outlined,
-                        title: 'Payment',
-                        onTap: () {
-                          onIconPressed();
-                           BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PaymentPageClickedEvent);
-                        },
-                      ),
-                      Divider(
-                        height: 65,
-                        thickness: 0.5,
-                        color: Colors.white.withOpacity(0.3),
-                        indent: 32,
-                        endIndent: 32,
-                      ),
-                      MenuItem(
-                        icon: Icons.home_outlined,
-                        title: 'Home',
-                      ),
-                      MenuItem(
-                        icon: Icons.group_outlined,
-                        title: 'Children',
-                      ),
-                      MenuItem(
-                        icon: Icons.payment_outlined,
-                        title: 'Payment',
-                      ),
-                    ],
-                  ),
+                  child: BodySideBarBuilder(),
                 ),
               ),
               Align(
@@ -175,6 +114,238 @@ class _SideBarState extends State<SideBar>
           ),
         );
       },
+    );
+  }
+  Column buildBibliotikerSideBarMenuItems(){
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 100),
+        ListTile(
+          title: Text(
+            'O\'rinov Sulaymon',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 30,
+            ),
+          ),
+          subtitle: Text(
+            'Ota-Ona',
+            style:
+            TextStyle(color: Color(0xFF1BB5FD), fontSize: 20),
+          ),
+          leading: CircleAvatar(
+            child: Icon(
+              Icons.perm_identity,
+              color: Colors.white,
+            ),
+            radius: 40,
+          ),
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.home_outlined,
+          title: 'Asosiy sahifa',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ParentHomePageClickedEvent);
+          },
+        ),
+        MenuItem(
+          icon: Icons.group_outlined,
+          title: 'Farzandlar',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ChildrenPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          icon: Icons.payment_outlined,
+          title: 'To\'lov',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.PaymentPageClickedEvent);
+          },
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.help,
+          title: 'Yordam',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HelpPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          icon: Icons.error,
+          title: 'Ilova haqida',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AboutPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          onTap: (){},
+          icon: Icons.close,
+          title: 'Chiqish',
+        ),
+      ],
+    );
+  }
+  Column buildParentSideBarMenuItems(){
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 100),
+        ListTile(
+          title: Text(
+            'O\'rinov Sulaymon',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 30,
+            ),
+          ),
+          subtitle: Text(
+            'Ota-Ona',
+            style:
+            TextStyle(color: Color(0xFF1BB5FD), fontSize: 20),
+          ),
+          leading: CircleAvatar(
+            child: Icon(
+              Icons.perm_identity,
+              color: Colors.white,
+            ),
+            radius: 40,
+          ),
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.home_outlined,
+          title: 'Asosiy sahifa',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ParentHomePageClickedEvent);
+          },
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.help,
+          title: 'Yordam',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HelpPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          icon: Icons.error,
+          title: 'Ilova haqida',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AboutPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          onTap: (){},
+          icon: Icons.close,
+          title: 'Chiqish',
+        ),
+      ],
+    );
+  }
+  Column buildParentAndBibliotikerSideBarMenuItems(){
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 100),
+        ListTile(
+          title: Text(
+            'O\'rinov Sulaymon',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 30,
+            ),
+          ),
+          subtitle: Text(
+            'Ota-Ona',
+            style:
+            TextStyle(color: Color(0xFF1BB5FD), fontSize: 20),
+          ),
+          leading: CircleAvatar(
+            child: Icon(
+              Icons.perm_identity,
+              color: Colors.white,
+            ),
+            radius: 40,
+          ),
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.home_outlined,
+          title: 'Asosiy sahifa',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.ParentHomePageClickedEvent);
+          },
+        ),
+        Divider(
+          height: 65,
+          thickness: 0.5,
+          color: Colors.white.withOpacity(0.3),
+          indent: 32,
+          endIndent: 32,
+        ),
+        MenuItem(
+          icon: Icons.help,
+          title: 'Yordam',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.HelpPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          icon: Icons.error,
+          title: 'Ilova haqida',
+          onTap: () {
+            onIconPressed();
+            BlocProvider.of<NavigationBloc>(context).add(NavigationEvents.AboutPageClickedEvent);
+          },
+        ),
+        MenuItem(
+          onTap: (){},
+          icon: Icons.close,
+          title: 'Chiqish',
+        ),
+      ],
     );
   }
 }

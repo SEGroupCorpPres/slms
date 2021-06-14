@@ -1,11 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../../../localization_service.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:slms/localization_service.dart';
 import 'drop_down_menu.dart';
 import 'form.dart';
-import '../../../constants.dart';
+import 'package:slms/constants.dart';
 
+// ignore: must_be_immutable
 class Body extends StatefulWidget {
+  bool parent;
+  bool bibliotiker;
+  Body({
+    Key key,
+    this.parent,
+    this.bibliotiker,
+  }) : super(key: key,);
+  bool get isParent{
+    return parent;
+  }
+  bool get isBibliotiker{
+    return bibliotiker;
+  }
   @override
   _BodyState createState() => _BodyState();
 }
@@ -28,37 +44,39 @@ class _BodyState extends State<Body> {
         height: double.infinity,
         width: double.infinity,
         color: kBodyColor,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Container(
-              height: (200.0 / 812.0) *  _height,
-              child: Center(
-                child: Text(
-                  'School Library Management System',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Roboto'),
-                  textAlign: TextAlign.center,
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          controller: ScrollController(),
+          scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                height: (200.0 / 812.0) *  _height,
+                child: Center(
+                  child: Text(
+                    'Maktab Kutubxona Boshqaruv Tizimi',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 40,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Roboto'),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-            ),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              child: Container(
-                height: (580.0 / 812.0) *  _height,
+              Container(
+                height: 0.75 *  _height,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(50),
-                        topLeft: Radius.circular(50)
+                        topRight: Radius.circular(35),
+                        topLeft: Radius.circular(35)
                     )
                 ),
                 child: Container(
@@ -70,11 +88,46 @@ class _BodyState extends State<Body> {
                           child: Column(
                             children: <Widget>[
                               DropdownSearchable(),
-                              SizedBox(height: 30.0 / 812.0 * _height),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: widget.bibliotiker,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            widget.bibliotiker = value;
+                                          });
+                                        },
+                                      ),
+                                      Text('Kutubxonachi'),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Checkbox(
+                                        value: widget.parent,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            widget.parent = value;
+                                          });
+                                        },
+                                      ),
+                                      Text('Ota-Ona'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              // SizedBox(height: 30.0 / 812.0 * _height),
                               SignInForm(),
                             ],
                           ),
                         ),
+                        // Text(
+                        //   'hello_title'.tr,
+                        //   style: TextStyle(color: Colors.blue, fontSize: 15, fontWeight: FontWeight.bold),
+                        // ),
                         SizedBox(height: (200.0 / 812.0) * _height),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,50 +147,52 @@ class _BodyState extends State<Body> {
                                 ),
                               ],
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Language',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(' '),
-                                new DropdownButton(
-                                  items: LocalizationService.langs.map(
-                                    (String value){
-                                      return new DropdownMenuItem<String>(
-                                        value: value,
-                                        child: new Text(value),
-                                      );
-                                    }
-                                  ).toList(),
-                                  value: this.lang,
-                                  underline: Container(color: Colors.transparent),
-                                  isExpanded: false,
-                                  onChanged: (newVal) {
-                                    setState((){
-                                      this.lang = newVal;
-                                      LocalizationService().changeLocale(newVal);
-                                    });
-                                  },
-                                ),
-                              ],
-                            )
+                            // Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.center,
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Text(
+                            //       'Language',
+                            //       style: TextStyle(
+                            //         fontSize: 20,
+                            //         fontWeight: FontWeight.bold,
+                            //       ),
+                            //     ),
+                            //     Text(' '),
+                            //     new DropdownButton(
+                            //       items: LocalizationService.langs.map(
+                            //         (String value){
+                            //           return new DropdownMenuItem<String>(
+                            //             value: value,
+                            //             child: new Text(value),
+                            //           );
+                            //         }
+                            //       ).toList(),
+                            //       value: this.lang,
+                            //       underline: Container(color: Colors.transparent),
+                            //       isExpanded: false,
+                            //       onChanged: (newVal) {
+                            //         setState((){
+                            //           this.lang = newVal;
+                            //           LocalizationService().changeLocale(newVal);
+                            //         });
+                            //       },
+                            //     ),
+                            //   ],
+                            // ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
 

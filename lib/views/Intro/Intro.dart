@@ -69,7 +69,7 @@ class _IntroState extends State<Intro> {
                       Navigator.pushNamed(context, LogInPage.routName);
                     },
                     child: Text(
-                      'Skip',
+                      'O\'tkazish',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),
@@ -100,16 +100,18 @@ class _IntroState extends State<Intro> {
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Get a rental book for your children',
+                              'Farzandlar Maktabdan ijaraga kitoblar olish',
                               style: kTitleStyle,
+                              textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                              'Farzandlaringiz Maktabdan ijaraga olgan darsliklar, va ijira to\'lovi  haqida ma\'lumot olish',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
@@ -129,16 +131,18 @@ class _IntroState extends State<Intro> {
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Manage List of Rental Books',
+                              'Ijara kitoblar boshqaruvi',
                               style: kTitleStyle,
+                              textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                              'Kutubxonachilar uchun kitoblar ijara to\'lovi boshqaruvi',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
@@ -150,23 +154,25 @@ class _IntroState extends State<Intro> {
                           children: <Widget>[
                             Center(
                               child: Image(
-                                image: AssetImage('assets/images/Wavy_Bus.jpg'),
+                                image: AssetImage('assets/images/Wavy_Bus.png'),
                                 height: 300.0,
                                 width: 300.0,
                               ),
                             ),
                             SizedBox(height: 30.0),
                             Text(
-                              'Pay by card',
+                              'Karta orqali to\'lov',
                               style: kTitleStyle,
+                              textAlign: TextAlign.center,
                             ),
                             SizedBox(height: 15.0),
                             Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                              'To\'lovni barcha turdaki kartalar orqali amalga oshirishingiz mumkin',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ],
                         ),
@@ -194,7 +200,7 @@ class _IntroState extends State<Intro> {
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Text(
-                                  'Next',
+                                  'Keyingi',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 22.0),
                                 ),
@@ -230,7 +236,7 @@ class _IntroState extends State<Intro> {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 30.0),
                     child: Text(
-                      'Get Started',
+                      'Boshlash',
                       style: TextStyle(
                         color: Color(0xFF5B16D0),
                         fontSize: 20.0,

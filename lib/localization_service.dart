@@ -8,7 +8,7 @@ import 'lang/ru_RU.dart';
 import 'lang/uz_UZ.dart';
 
 class LocalizationService extends Translations{
-  static final local = Locale('en', 'US');
+  static final locale = Locale('en', 'US');
   static final fallBackLocale = Locale('en', 'US');
   static final langs = ['English', 'Russian', 'Uzbek'];
   static final locales = [

@@ -6,6 +6,9 @@ import 'full_name_text_field_widget.dart';
 import 'password_text_field_widget.dart';
 
 class SignInForm extends StatefulWidget {
+  SignInForm({
+    Key key,
+  }) : super(key: key);
   @override
   _SignInFormState createState() => _SignInFormState();
 }
@@ -23,33 +26,43 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           children: <Widget>[
             FullNameTextFieldWidget(
-              hintText: 'Full Name',
-              labelText: 'Full Name',
+              hintText: 'Ism Familiya',
+              labelText: 'Ism Familiya',
               obscureText: false,
               prefixIconData: Icons.person,
             ),
             SizedBox(height: 10),
             PasswordTextFieldWidget(
-              hintText: 'Password',
-              labelText: 'Password',
+              hintText: 'Parol',
+              labelText: 'Parol',
               obscureText: true,
               prefixIconData: Icons.lock,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Checkbox(
-                  value: checkBoxValue,
-                  onChanged: (bool value) {
-                    setState(() {
-                      checkBoxValue = value;
-                    });
-                  },
+                Row(
+                  children: [
+                    Checkbox(
+                      value: checkBoxValue,
+                      onChanged: (bool value) {
+                        setState(() {
+                          checkBoxValue = value;
+                        });
+                      },
+                    ),
+                    Text(
+                      'Saqlab qo\'yish',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
                 ),
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    'forgot password ?',
+                    'Parolni unitdingizmi ?',
                     style: TextStyle(
                       color: Colors.blue,
                     ),
@@ -58,6 +71,7 @@ class _SignInFormState extends State<SignInForm> {
               ],
             ),
             SizedBox(height: (10 / 812.0) * _height),
+            // ignore: deprecated_member_use
             RaisedButton(
               color: Colors.blue,
               onPressed: () {
@@ -72,7 +86,7 @@ class _SignInFormState extends State<SignInForm> {
                 height: (50.0 / 812.0) * _width,
                 child: Center(
                   child: Text(
-                    'Sign In'.toUpperCase(),
+                    'Kirish'.toUpperCase(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,

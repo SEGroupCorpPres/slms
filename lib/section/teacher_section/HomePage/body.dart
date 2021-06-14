@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:slms/bloc.navigation_bloc/navigation_bloc.dart';
 
-class TeacherHomePage extends StatelessWidget {
-  static String routName = '/teacheHomePage';
+class BibliotikerHomePageBody extends StatelessWidget with NavigationStates{
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+      child: Text('Bibliotiker Section'),
+    );
   }
 }
